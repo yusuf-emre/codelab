@@ -1,4 +1,25 @@
-# CodeLab 
+# CodeLab
+
+## Solution
+The endpoint is created at the ```api\Controllers\InsuranceController.cs```.
+
+**Top** method inside the controller is an HttpGet method to return highest combined values of a parent insurance with its children.
+  
+- The method takes two integer parameters maxCount and maxDepth and returns integer array
+    - maxCount sets how many of the highest combined values it will return in the array
+    - maxDepth sets how many levels of descendants counted in the combined value of a respective parent
+
+- The method works as follows;
+    - Brings the list of insurances via the repository
+    - Creates an empty array to save all combined values.
+    - Starts to iterate over every insurance in the list
+    - In every iteration it also calls the recursive method **LoopChildren** from the repository
+        - This method loops over its descendants to the very bottom until it reachs 'maxDepth' or has no child anymore
+        - To track current depth in each level for every insurance, 'Depth' attribute added to the insurance class.
+    - By running all loops from bottom siblings to top, it accumulates values 
+    - Once it finishes all loops it puts the final sum value to the parents' respective index in the empty array
+    - Once it finishes all of the insurances in the list it sorts the filled array and takes the highest certain amount of values according to 'maxCount'
+    - It returns these combined values in an array with HTTP 200 OK.
 
 ## Information
 Data-models used in the service is of type Insurance.
