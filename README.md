@@ -3,9 +3,9 @@
 ## Solution
 The endpoint is created at the ```api\Controllers\InsuranceController.cs```.
 
-**Top** method inside the controller is an HttpGet method to return highest combined values of a parent insurance with its children.
+**Top** method inside the controller is an HttpGet method to return highest combined values of insurances with its respective descendants.
   
-- The method takes two integer parameters maxCount and maxDepth and returns integer array
+- The method takes two integer parameters maxCount and maxDepth and returns an integer array with ActionResult
     - maxCount sets how many of the highest combined values it will return in the array
     - maxDepth sets how many levels of descendants counted in the combined value of a respective parent
 
@@ -14,10 +14,10 @@ The endpoint is created at the ```api\Controllers\InsuranceController.cs```.
     - Creates an empty array to save all combined values.
     - Starts to iterate over every insurance in the list
     - In every iteration it also calls the recursive method **LoopChildren** from the repository
-        - This method loops over its descendants to the very bottom until it reachs 'maxDepth' or has no child anymore
-        - To track current depth in each level for every insurance, 'Depth' attribute added to the insurance class.
-    - By running all loops from bottom siblings to top, it accumulates values 
-    - Once it finishes all loops it puts the final sum value to the parents' respective index in the empty array
+        - This method loops over its descendants to the utmost bottom possible, until it reachs 'maxDepth' or has no child anymore
+        - To track current depth in each level for every insurance, 'Depth' attribute added to the insurance model.
+    - By running all loops from bottom siblings to top, it adds values to create cumulative sum 
+    - Once it finishes all loops it puts the final sum value to the parent's respective index in the array
     - Once it finishes all of the insurances in the list it sorts the filled array and takes the highest certain amount of values according to 'maxCount'
     - It returns these combined values in an array with HTTP 200 OK.
 
