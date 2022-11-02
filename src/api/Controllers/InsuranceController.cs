@@ -15,19 +15,19 @@ namespace api.Controllers
             _repo = repo;
         }
         [HttpGet("top/{maxCount}/{maxDepth}")]
-        public ActionResult<int []> Top(int maxCount, int maxDepth)
+        public ActionResult<int[]> Top(int maxCount, int maxDepth)
         {
             var insuranceList = _repo.GetAll();
             var allCombinedValues = new int[insuranceList.Count()];
             var i = 0;
-        
-            foreach(var insurance in insuranceList)
+
+            foreach (var insurance in insuranceList)
             {
                 insurance.Depth = 0;
                 var sum = 0;
                 sum += insurance.Value;
 
-                if(insurance.Children.Count() == 0 || insurance.Depth == maxDepth)
+                if (insurance.Children.Count() == 0 || insurance.Depth == maxDepth)
                 {
                     allCombinedValues[i] = sum;
                     i++;

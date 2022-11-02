@@ -22,6 +22,16 @@ public static class EndpointRouteBuilderExtensions
                     )
                     .WithName("GetInsurance")
                     .WithMetadata(new SwaggerOperationAttribute("Get insurance", "Get a insurance by id"));
+        // endpointRouteBuilder.MapGet("/insurance/top/{maxCount}/{maxDepth}",
+        //             (
+        //                 [FromServices] IRepository<Insurance> insuranceRepository,
+        //                 [FromRoute] int maxCount,
+        //                 [FromRoute] int maxDepth,
+        //                 CancellationToken cancellationToken) =>
+        //                     insuranceRepository.Top(maxCount, maxDepth)
+        //             )
+        //             .WithName("GetTopInsurances")
+        //             .WithMetadata(new SwaggerOperationAttribute("Get top insurances", "Get top insurance by maxCount and maxDepth"));
         endpointRouteBuilder.MapGet("/insurance",
                     (
                         [FromServices] IRepository<Insurance> insuranceRepository,

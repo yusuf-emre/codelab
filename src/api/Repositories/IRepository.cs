@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using api.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace api.Repositories;
 
@@ -13,4 +14,5 @@ public interface IRepository<T> : IDisposable
     void Update(T item);
     void Save();
     void LoopChildren(Insurance insurance, int sum, int[] allCombinedValues, int i, int maxDepth);
+    // int [] Top(int maxCount, int maxDepth);
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using api.Data;
 using api.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Repositories;
@@ -48,6 +49,34 @@ public class InsuranceRepository : IRepository<Insurance>, IDisposable
         context.SaveChanges();
     }
 
+    // public int [] Top(int maxCount, int maxDepth)
+    //     {
+    //         var insuranceList = GetAll();
+    //         var allCombinedValues = new int[insuranceList.Count()];
+    //         var i = 0;
+
+    //         foreach(var insurance in insuranceList)
+    //         {
+    //             insurance.Depth = 0;
+    //             var sum = 0;
+    //             sum += insurance.Value;
+
+    //             if(insurance.Children.Count() == 0 || insurance.Depth == maxDepth)
+    //             {
+    //                 allCombinedValues[i] = sum;
+    //                 i++;
+    //                 continue;
+    //             }
+
+    //             LoopChildren(insurance, sum, allCombinedValues, i, maxDepth);
+
+    //             i++;
+    //         }
+
+    //         var topValues = allCombinedValues.OrderByDescending(x => x).Take(maxCount).ToArray();
+    //         return topValues;
+    //     }
+
     public void LoopChildren(Insurance insurance, int sum, int[] allCombinedValues, int i, int maxDepth)
     {
 
@@ -57,8 +86,8 @@ public class InsuranceRepository : IRepository<Insurance>, IDisposable
             sum += child.Value;
             allCombinedValues[i] = sum;
 
-            if(child.Children.Count() == 0 || child.Depth == maxDepth) continue;
-            
+            if (child.Children.Count() == 0 || child.Depth == maxDepth) continue;
+
             LoopChildren(child, sum, allCombinedValues, i, maxDepth);
         }
     }
